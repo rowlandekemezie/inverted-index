@@ -1,0 +1,23 @@
+{
+  "name": "inverted-index",
+  "version": "1.0.0",
+  "description": "inverted Index",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "http-server -a localhost -p 8000 -c-1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andela-rekemezie/inverted-index.git"
+  },
+  "author": "Rowland",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/andela-rekemezie/inverted-index/issues"
+  },
+  "homepage": "https://github.com/andela-rekemezie/inverted-index#readme",
+  "dependencies": {
+    "http-server": "^0.8.5"
+  }
+}
