@@ -5,7 +5,8 @@ function Index(){
   this.createIndex = createIndex;
   this.searchIndex = searchIndex;
 }
-// read the Json document...
+
+// read the Json document
 function readDoc(filePath){
  var bookContent;
  $.ajax({
@@ -24,15 +25,18 @@ function readDoc(filePath){
 function createIndex(filePath){
   var objIndex = {};
   var jsonContent = this.readDoc(filePath);
+
   // loop through the object array
   for(var i = 0; i < jsonContent.length; i++){
     // loop through the each object in the array
     for(var prop in jsonContent[i]){
       // convert object to array of strings
       var splitToken = (jsonContent[i][prop]).split(' ');
+
       // normalize each item and replace special characters
       for(var k = 0; k < splitToken.length; k++){
         var normalizeToken = splitToken[k].toLowerCase().replace(/[.,:]/g,"");
+
          // check if the token already exist in a book
          if(objIndex.hasOwnProperty(normalizeToken)){
            var objKey = objIndex[normalizeToken];
@@ -51,9 +55,22 @@ function createIndex(filePath){
 
 // method to get index from the Json object
 function getIndex(filePath){
-  var bookIndex = this.createIndex(filePath);
-  return bookIndex;
+  return this.createIndex(filePath);
 }
 
 // method to search index for terms
-function search (terms){}
+function searchIndex (terms){
+  var searchResult = [];
+  var bookIndex = this.getIndex('books.json');
+  for (var i in arguments){
+    for (var j in bookIndex){
+      if(arguments[i] === j){
+        searchResult.push(bookIndex[j]);
+      }
+      // else{
+      //   return "Not in the document";
+      // }
+    }
+  }
+  return searchResult;
+}
