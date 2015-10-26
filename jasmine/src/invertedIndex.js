@@ -1,5 +1,5 @@
 // the invertedIndex Class Constructor
-// you could also use prototype to add methods to you Index class
+// you could also use prototype to add methods to your Index class
 function Index(){
   this.readDoc = readDoc;
   this.getIndex = getIndex;
