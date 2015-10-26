@@ -1,4 +1,5 @@
 // the invertedIndex Class Constructor
+// you could also use prototype to add methods to you Index class
 function Index(){
   this.readDoc = readDoc;
   this.getIndex = getIndex;
@@ -21,7 +22,7 @@ function readDoc(filePath){
   return bookContent;
 }
 
-// method to create  and map index..
+// method to create and map index
 function createIndex(filePath){
   var objIndex = {};
   var jsonContent = this.readDoc(filePath);
@@ -60,17 +61,21 @@ function getIndex(filePath){
 
 // method to search index for terms
 function searchIndex (terms){
-  var searchResult = [];
   var bookIndex = this.getIndex('books.json');
+  var searchResult = [];
   for (var i in arguments){
-    for (var j in bookIndex){
-      if(arguments[i] === j){
-        searchResult.push(bookIndex[j]);
+
+    // check that the item does exist
+    if(bookIndex.hasOwnProperty(arguments[i])){
+      for (var term in bookIndex){
+        if(arguments[i] === term){
+          searchResult.push(bookIndex[term]);
+        }
       }
-      // else{
-      //   return "Not in the document";
-      // }
+    }
+    else{
+      searchResult.push('Word not found');
     }
   }
-  return searchResult;
+return searchResult;
 }

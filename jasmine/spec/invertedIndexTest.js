@@ -1,4 +1,3 @@
-//"use strict";
 describe("IndexFile", function() {
   var indexInstance = new Index();
 
@@ -17,6 +16,7 @@ describe("IndexFile", function() {
        }
     });
   });
+
   describe("Populate Index", function(){
     var getIndex = indexInstance.getIndex('books.json');
 
@@ -44,11 +44,13 @@ describe("IndexFile", function() {
       expect(indexInstance.searchIndex('alice')).toEqual([[0]]);
       expect(indexInstance.searchIndex('wonderland')).toEqual([[0]]);
       expect(indexInstance.searchIndex('ring')).toEqual([[1]]);
+      expect(indexInstance.searchIndex('cool')).toEqual(['Word not found']);
     });
 
     it("should handle a varied number of search terms as arguments", function(){
       expect(indexInstance.searchIndex('lord', 'rabbit', 'man', 'dwarf')).toEqual([[1], [0], [1], [1]]);
       expect(indexInstance.searchIndex('a', 'of', 'elf')).toEqual([[0, 1], [0, 1], [1]]);
+      expect(indexInstance.searchIndex('unusual', 'into', 'ifeanyi', 'hobbit')).toEqual([[1],[0], 'Word not found', [1]]);
     });
   });
 });
