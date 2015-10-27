@@ -8,8 +8,8 @@ function Index(){
 }
 
 // read the Json document
-function readDoc(filePath){
- var bookContent;
+function readDoc (filePath){
+var bookContent;
  $.ajax({
    // allow for synchronous reading of the json file
    'async': false,
@@ -19,13 +19,14 @@ function readDoc(filePath){
    bookContent = data;
    }
  });
-  return bookContent;
+ this.bookContent = bookContent;
 }
 
 // method to create and map index
 function createIndex(filePath){
+  this.readDoc(filePath);
   var objIndex = {};
-  var jsonContent = this.readDoc(filePath);
+  var jsonContent = this.bookContent;
 
   // loop through the object array
   for(var i = 0; i < jsonContent.length; i++){
@@ -51,17 +52,18 @@ function createIndex(filePath){
       }
     }
   }
-  return objIndex;
+  this.objIndex = objIndex;
 }
 
 // method to get index from the Json object
 function getIndex(filePath){
-  return this.createIndex(filePath);
+  this.createIndex(filePath);
+  return this.objIndex;
 }
 
 // method to search index for terms
 function searchIndex (terms){
-  var bookIndex = this.getIndex('books.json');
+  var bookIndex = this.objIndex;
   var searchResult = [];
   for (var i in arguments){
 

@@ -2,18 +2,26 @@ describe("IndexFile", function() {
   var indexInstance = new Index();
 
   describe("Read book data", function(filePath) {
-    var jsonBook = indexInstance.readDoc('books.json');
+    indexInstance.readDoc('books.json');
+    var jsonBook = indexInstance.bookContent;
     it("should not be empty", function() {
       expect(jsonBook).not.toBe([]);
       expect(jsonBook.length).not.toBe(0);
     });
     it("should return a string", function(){
       expect(jsonBook).toEqual(jasmine.any(Object));
-        for(var i = 0; i < jsonBook.length; i++){
-          for(var j in arguments[i]){
-            expect(jsonBook[j]).toEqual(jasmine.any(String));
+      var arrayBooks = [];
+        for(var i in jsonBook){
+          for(var j in jsonBook[i]){
+            arrayBooks.push(jsonBook[i][j]);
           }
-       }
+        }
+        function checkIsString(term){
+          if(typeof term === 'string'){
+            return true;
+          }
+        }
+        expect(arrayBooks.every(checkIsString)).toEqual(true);
     });
   });
 
